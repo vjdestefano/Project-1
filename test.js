@@ -17,7 +17,7 @@ var playPause = anime({
 var clickAnime = anime({
   targets:'.clickThis',
   width:[
-    {value: '186px', duration: 500, elasticity:100, easing: 'easeInOutQuart', delay: 900},
+    {value: '335px', duration: 500, elasticity:100, easing: 'easeInOutQuart', delay: 900},
     {value: '0px', duration: 500, elasticity:100, easing: 'easeInOutQuart', delay: 400},
   ],
   backgroundColor:[
@@ -25,10 +25,7 @@ var clickAnime = anime({
     {value: '#ef6c00', duration: 800}
   ],
    translateX:[
-    {value: '5px', duration: 1300, elasticity:100, easing: 'easeInOutQuart', delay: 1300},
-  ],
-  translateY:[
-    {value: '30px', duration: 1200, elasticity:100},
+    {value: '0px', duration: 1300, elasticity:100, easing: 'easeInOutQuart', delay: 1600},
   ]
 
 });
