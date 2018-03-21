@@ -50,98 +50,100 @@
 
 
   <main>
-
-    <div class="row">
-      <div class="card col s10 m9 l9">
-        <div class="card-image waves-effect waves-block waves-light">
-            <video style='display: none'  id='myvideo' width="640" height="360" controls>        
-                <source id="myvidsrc"    type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <video style='display: none' id='myvideo2' width="640" height="360" controls>        
-           
-                  <source id="myvidsrc2"   type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <video style='display: none'  id='myvideo3' width="640" height="360" controls>        
-           
-                  <source id="myvidsrc3"    type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-          <div id="rightherebaby" class="mycanvas">
-
+    <div class="container">
+      <div class="row">
+        <div id="sideBar" class="col s12 m6 l6">
+            <form id="searchTest" onSubmit="return false;">
+              <div id="searchBar" class="input-field z-depth-3">
+  
+                <input id="searchBarMain" type="text" class="validate" autocomplete="off">
+  
+                <label for="searchBarMain">
+                  <i class="material-icons">search</i>Search Here!</label>
+              </div>
+              <div id="domAttributes">
+                <div class="test valign-wrapper center-align"></div>
+              </div>
+  
           </div>
-        </div>
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4">Throw content in here
-            <i class="material-icons right">more_vert</i>
-          </span>
-          <p>
-            <a href="#">place clicked link here</a>
-          </p>
-        </div>
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Search Results
-            <i class="material-icons right">close</i>
-          </span>
-          <div id="searchResults">
-            <p id="test1">
+  
+          </form>
+      </div>
+        
 
+      <div class="row">
+        <div class="card col s12 m10 l10">
+          <div class="card-image waves-effect waves-block waves-light">
+
+            <div id="rightherebaby" class="mycanvas">
+              <video style='display: none' id='myvideo' width="640" height="360" controls>
+                <source id="myvidsrc" type="video/mp4"> Your browser does not support the video tag.
+              </video>
+              <video style='display: none' id='myvideo2' width="640" height="360" controls>
+
+                <source id="myvidsrc2" type="video/mp4"> Your browser does not support the video tag.
+              </video>
+              <video style='display: none' id='myvideo3' width="640" height="360" controls>
+
+                <source id="myvidsrc3" type="video/mp4"> Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">Throw content in here
+              <i class="material-icons right">more_vert</i>
+            </span>
+            <p>
+              <a href="#">place clicked link here</a>
             </p>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Search Results
+              <i class="material-icons right">close</i>
+            </span>
+            <div id="searchResults">
+              <p id="test1">
 
+              </p>
+
+            </div>
           </div>
         </div>
       </div>
-      <div id="sideBar" class="col s2 m3 l3">
-        <form id="searchTest" onSubmit="return false;">
-          <div id="searchBar" class="input-field z-depth-3">
 
-            <input id="searchBarMain" type="text" class="validate">
+        
 
-            <label for="searchBarMain">
-              <i class="material-icons">search</i>Search Here!</label>
-          </div>
-          <div id="domAttributes">
-            <div class="test"></div>
-          </div>
+      <div class="col s2 m2 l2">
+        <ul class="collapsible" data-collapsible="accordion">
+          <li id="testColoring">
+            <div class="collapsible-header">
+              <i class="material-icons"></i>Introduction</div>
+            <div class="collapsible-body">
+              <span>This is the first Project from Ant Vin Abu inc.</span>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">
+              <i class="material-icons">place</i>Idea</div>
+            <div class="collapsible-body">
+              <span>We wanted to make a 3D item viewing webpage that allowed users to browse the web like never before!</span>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header">
+              <i class="material-icons">whatshot</i>Methods</div>
+            <div class="clickThis underlined"></div>
+            <div class="collapsible-body">
+              <span>-anime.js -three.js -youtube.api -wikipedia.api</span>
+            </div>
+          </li>
+        </ul>
 
+      
       </div>
-
-
-
-
-
-      </form>
-
-
-      <ul class="collapsible" data-collapsible="accordion">
-        <li id="testColoring">
-          <div class="collapsible-header">
-            <i class="material-icons"></i>Introduction</div>
-          <div class="collapsible-body">
-            <span>This is the first Project from Ant Vin Abu inc.</span>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">place</i>Idea</div>
-          <div class="collapsible-body">
-            <span>We wanted to make a 3D item viewing webpage that allowed users to browse the web like never before!</span>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">whatshot</i>Methods</div>
-          <div class="clickThis underlined"></div>
-          <div class="collapsible-body">
-            <span>-anime.js -three.js -youtube.api -wikipedia.api</span>
-          </div>
-        </li>
-      </ul>
+        
 
     </div>
-
-
 
 
 

@@ -1,10 +1,9 @@
 var playPause = anime({
   targets: '#domAttributes .test',
   width:[
-    {value: '50px', duration: 500, elasticity:100, easing: 'easeInOutQuart'},
-    {value: '150px', duration: 1000, elasticity:500},
-    {value: '150px', duration: 1000, elasticity:500, easing: 'easeInOutQuart'},
-    {value: '150px', duration: 500, elasticity:100, easing: 'easeOutExpo'}
+    {value: '200px', duration: 500, elasticity:100, easing: 'easeInOutQuart'},
+    {value: '270px', duration: 1000, elasticity:500, easing: 'easeInOutQuart'},
+    {value: '335px', duration: 500, elasticity:100, easing: 'easeOutExpo'}
   ],
   backgroundColor:[
     {value: '#ef6c00', duration: 500},
