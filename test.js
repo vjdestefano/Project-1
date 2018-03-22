@@ -2,7 +2,7 @@ var playPause = anime({
   targets: '#domAttributes .test',
   width:[
     {value: '200px', duration: 500, elasticity:100, easing: 'easeInOutQuart'},
-    {value: '270px', duration: 1000, elasticity:500, easing: 'easeInOutQuart'},
+    {value: '270px', duration: 500, elasticity:500, easing: 'easeInOutQuart'},
     {value: '335px', duration: 500, elasticity:100, easing: 'easeOutExpo'}
   ],
   backgroundColor:[
@@ -10,7 +10,24 @@ var playPause = anime({
     {value: '#ef6c00', duration: 1000},
     {value: '#FFF', duration: 800}
   ],
+  value: "100%",
+  round: 1,
  
+});
+
+var myObject = {
+  Loading: '0%'
+}
+var JSobjectProp = anime({
+  targets: myObject,
+  duration: 1600,  
+  Loading: '100%',
+  easing: 'linear',
+  round: 1,
+  update: function() {
+    var el = document.querySelector('#JSobjectProp pre');
+    el.innerHTML = JSON.stringify(myObject);
+  }
 });
 
 
@@ -26,7 +43,8 @@ var clickAnime = anime({
   ],
    translateX:[
     {value: '0px', duration: 1300, elasticity:100, easing: 'easeInOutQuart', delay: 1600},
-  ]
+  ],
+
 
 });
 
@@ -38,16 +56,17 @@ $(".collapsible-header").on("click",function(event){
 
 
 
-
 $("#searchTest").on("keyup", function(event) {
   event.preventDefault();
   if (event.key === "Enter") {
     event.preventDefault();
     var testKey = $("#searchBarMain").val();
     console.log(testKey);
-    $(".test").text(testKey);
+    //$(".test").text(testKey);
     $("#test1").text(testKey);
     int3d.StartUp($("#rightherebaby"),testKey);
+    JSobjectProp.restart();
+    JSobjectProp.play();
     playPause.restart();
     playPause.play();
     $("#searchBarMain").val("");

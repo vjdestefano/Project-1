@@ -19,9 +19,10 @@
 
   <nav>
     <div class="nav-wrapper #ef6c00 orange darken-3">
-      <a href="#" class="brand-logo ">
+      <img src="images/coollogo_com-26721639 (1).png" height="50px" width="100px">
+      <!-- <a href="#" class="brand-logo ">
         <i class=" large material-icons right">3d_rotation</i>
-      </a>
+      </a> -->
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li>
           <!-- Switch -->
@@ -48,11 +49,23 @@
     </div>
   </nav>
 
+  <video style='display: none' id='myvideo' width="640" height="360" controls>
+      <source id="myvidsrc" type="video/mp4"> Your browser does not support the video tag.
+    </video>
+    <video style='display: none' id='myvideo2' width="640" height="360" controls>
+
+      <source id="myvidsrc2" type="video/mp4"> Your browser does not support the video tag.
+    </video>
+    <video style='display: none' id='myvideo3' width="640" height="360" controls>
+
+      <source id="myvidsrc3" type="video/mp4"> Your browser does not support the video tag.
+    </video>
+
 
   <main>
     <div class="container">
-      <div class="row">
-        <div id="sideBar" class="col s12 m6 l6">
+      <div id="mobility" class="row">
+        <div id="sideBar" class="col s12 m8 l7">
             <form id="searchTest" onSubmit="return false;">
               <div id="searchBar" class="input-field z-depth-3">
   
@@ -62,50 +75,51 @@
                   <i class="material-icons">search</i>Search Here!</label>
               </div>
               <div id="domAttributes">
-                <div class="test valign-wrapper center-align"></div>
+                <div class="test valign-wrapper center-align">
+                    <div id="JSobjectProp">
+                        <pre>{}</pre>
+                      </div>
+                </div>
               </div>
-  
+            </form>
           </div>
-  
-          </form>
-      </div>
+        <div  id = "sideBarButton" class="col s1 m4 l4">
+          <!-- <a  href="#" data-activates="slide-out" class="button-collapse show-on-large waves-effect waves-light btn">SideBar</a> -->
+        </div>
         
+        
+        
+       
+
+
+      </div>
+
 
       <div class="row">
+       
         <div class="card col s12 m12 l12">
-          <div class="card-image waves-effect waves-block waves-light">
+          <div class="card-image waves-effect waves-block waves-light  z-depth-3">
 
             <div id="rightherebaby" class="mycanvas">
-              <video style='display: none' id='myvideo' width="640" height="360" controls>
-                <source id="myvidsrc" type="video/mp4"> Your browser does not support the video tag.
-              </video>
-              <video style='display: none' id='myvideo2' width="640" height="360" controls>
-
-                <source id="myvidsrc2" type="video/mp4"> Your browser does not support the video tag.
-              </video>
-              <video style='display: none' id='myvideo3' width="640" height="360" controls>
-
-                <source id="myvidsrc3" type="video/mp4"> Your browser does not support the video tag.
-              </video>
+              
             </div>
           </div>
-          <div class="card-content">
+          <!-- <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Throw content in here
               <i class="material-icons right">more_vert</i>
             </span>
             <p>
               <a href="#">place clicked link here</a>
             </p>
-          </div>
+          </div> -->
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Search Results
               <i class="material-icons right">close</i>
             </span>
             <div id="searchResults">
-              <p id="test1">
-
-              </p>
-
+              <p id="test1">      </p>
+              <!-- <iframe width="320" height="320" src="https://www.youtube.com/embed/8iFGgfJiLsg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              <div id="throwArticlesHere"></div> -->
             </div>
           </div>
         </div>
