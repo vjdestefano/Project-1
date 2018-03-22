@@ -141,14 +141,14 @@ var ant3d = {
     //inJQueryDomElement = $('.mycanvas');
     $(document).off('touchstart');
     $(document).on('touchstart', function (e) {
-      
+      e.preventDefault();
       
       ant3d.mylastevent = e;
       ant3d.RunVideos();
     });
     $(document).off('touchend');
     $(document).on('touchend', function (e) {
-      
+      e.preventDefault();
       ant3d.DeltaX = ant3d.mylastevent.originalEvent.touches[0].pageX - e.originalEvent.changedTouches[0].pageX;
       
       ant3d.ant3dMouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
