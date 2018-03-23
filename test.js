@@ -104,12 +104,14 @@ $("#searchTest").on("keyup", function(event) {
 
 $("#closeButton").on("click", function() {
   $("#the3Dbox").slideToggle();
+  $("#testVid").slideToggle();
   $("#openButton").toggle();
   $("#closeButton").toggle();
 });
 
 $("#openButton").on("click", function() {
   $("#the3Dbox").slideToggle();
+  $("#testVid").slideToggle();
   $("#closeButton").toggle();
   $("#openButton").toggle();
 });
