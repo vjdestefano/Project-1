@@ -1,48 +1,36 @@
-#test{
+#test {
   margin: 0;
 }
 
-body{
+body {
   background: #616161 !important;
 }
 
-.switch{
+.switch {
   padding-right: 5px !important;
 }
 
-#toc li{
-padding: 10px;
-margin-top: 20px;
- 
-}
-
-
-#searchBarMain{
-  margin: 0;
-  background-color: azure !important;
-}
-
-a{
+a {
   color: azure !important;
 }
 
-.active{
+.active {
   color: royalblue !important;
 }
 
-.switch label input[type=checkbox]:checked+.lever {
+.switch label input[type="checkbox"]:checked + .lever {
   background-color: royalblue;
 }
 
-.switch label input[type=checkbox]:checked+.lever:after {
-  background-color: royalblue;;
+.switch label input[type="checkbox"]:checked + .lever:after {
+  background-color: royalblue;
 }
 
 .row .input-field input:focus {
   border-bottom: 1px solid royalblue !important;
-  box-shadow: 0 1px 0 0 royalblue !important
+  box-shadow: 0 1px 0 0 royalblue !important;
 }
-.input-field input[type=text]:focus {
+.input-field input[type="text"]:focus {
   border-bottom: 1px solid #000;
   box-shadow: 0 1px 0 0 #000;
 }
@@ -51,47 +39,70 @@ a{
   color: #000;
 }
 
-
-#searchBar{
+#searchBar {
   margin-top: 7px;
 }
 
-.test{
-height: 50px;
-width: 160;
-background-color: azure;
-padding-left: 10px;
-padding-top: 5px;
-margin-left: 10px;
-margin-right: 10px;
-
+.test {
+  height: 50px;
+  width: 160;
+  background-color: azure;
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.hoverable{
+.hoverable {
   padding-left: 10px;
 }
 
-.underlined{
+.underlined {
   bottom: 30px;
   height: 5px;
   width: 5px;
 }
-.collapsible .active{
-  border-color:#616161;
+.collapsible .active {
+  border-color: #616161;
   border: 0px;
   color: #ef6c00 !important;
 }
 
-#sideBar{
+#toc li {
+  padding: 10px;
+  margin-top: 20px;
+}
+
+#searchBarMain {
+  margin: 0;
+  background-color: azure !important;
+}
+
+#sideBar {
   padding: 0px;
-
 }
 
-#sideBarButton{
-margin-top: 7px;
+#sideBarButton {
+  margin-top: 7px;
 }
 
-#mobility{
+#mobility {
   margin-bottom: 0px;
 }
 
+#closeButton {
+  background-color: #ef6c00 !important;
+}
+
+#openButton {
+  background-color: #0000ff;
+}
+
+#the3Dbox {
+  margin: 0;
+  padding: 0;
+}
+
+#the3Dbox.card {
+  background-color: #ef6c00 !important;
+}
