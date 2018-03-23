@@ -94,7 +94,7 @@ $("#searchTest").on("keyup", function(event) {
 
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
-    msg.text = testKey;
+    msg.text = "searching for " + testKey;
     msg.pitch = 0.5;
     msg.rate = 0.4;
 

@@ -98,11 +98,11 @@ a {
   background-color: #0000ff;
 }
 
-#the3Dbox {
+#the3Dbox,#youTubeVid {
   margin: 0;
   padding: 0;
 }
 
-#the3Dbox.card {
+#the3Dbox,#youTubeVid.card {
   background-color: #ef6c00 !important;
 }
