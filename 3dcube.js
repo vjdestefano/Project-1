@@ -4,9 +4,10 @@
 //The script is interfaced by calling the ant3d.Startup method
 //with the parameters SearchText, $(DomElement). See bottom of code for example.
 var ant3d = {
+  friction: .98,
   DeltaX: 0,
-  Wcoef: 0.9,
-  Hcoef: 1,
+  Wcoef: .8,
+  Hcoef: .8,
   tempcanvas: '',
   colGiffys: [],
   rotspeed: 0,
@@ -311,11 +312,14 @@ var ant3d = {
     video3.src = ant3d.colGiffys[2];
   
     video.load();
+    $(video).on('loadeddata', function() {e.preventDefault;});
     //video.addEventListener('loadeddata', function () {
       video2.load();
+      $(video2).on('loadeddata', function() {e.preventDefault;});
     //  video2.addEventListener('loadeddata', function () {
         video3.load();
     //    video3.addEventListener('loadeddata', function () {
+      $(video3).on('loadeddata', function() {e.preventDefault;});
           video.loop = true;
           video.play();
           video2.loop = true;
@@ -397,7 +401,7 @@ var ant3d = {
       item.rotation.y += -ant3d.rotspeed;
     });
     ant3d.renderer.render(ant3d.scene, ant3d.camera);
-    ant3d.rotspeed = ant3d.rotspeed * .98;
+    ant3d.rotspeed = ant3d.rotspeed * ant3d.friction;
     requestAnimationFrame(ant3d.Animate);
   },
   rotate: function (cx, cy, x, y, angle) {
@@ -412,16 +416,16 @@ var ant3d = {
 $(document).ready(function () {
   ant3d.StartUp($("#rightherebaby"), 'Programming');
   $(window).on('resize',function(){ant3d.Resize();});
-  $('#searchTest').on('click', function () { 
+  $('#search').on('click', function () { 
     //calling ant3d.Startup example...
     //ant3d.StartUp(jQueryDomElement, SearchText);   
-    ant3d.StartUp($("#rightherebaby"), $('#searchBarMain').val());
-    $('#searchBarMain').val('');
+    ant3d.StartUp($("#rightherebaby"), $('#input').val());
+    $('#input').val('');
   });
-  $('#searchBarMain').on('keyup',function(e){
+  $('#input').on('keyup',function(e){
       if (e.key === 'Enter' ){
-        ant3d.StartUp($("#rightherebaby"), $('#searchBarMain').val());
-        $('#searchBarMain').val('');
+        ant3d.StartUp($("#rightherebaby"), $('#input').val());
+        $('#input').val('');
       }
   });
 });
