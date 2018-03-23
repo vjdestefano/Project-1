@@ -6,8 +6,8 @@
 var ant3d = {
   friction: .98,
   DeltaX: 0,
-  Wcoef: .8,
-  Hcoef: .8,
+  Wcoef: .9,
+  Hcoef: .9,
   tempcanvas: '',
   colGiffys: [],
   rotspeed: 0,
