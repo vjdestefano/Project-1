@@ -1,13 +1,17 @@
 //A.Napolitano  03/22/2018
+
 //ant3d is a simple api extraction and 3d interface written in THREE.js
 //It currently displays data from the API's: Wikipedia, Giffy
+
 //The script is interfaced by calling the ant3d.Startup method
 //with the parameters SearchText, $(DomElement). See bottom of code for example.
+
 var ant3d = {
-  friction: .98,
+  friction: .995,
   DeltaX: 0,
-  Wcoef: .9,
-  Hcoef: .9,
+  Wcoef: 1,
+  Hcoef: .6,
+  jRightHereBaby: '',
   tempcanvas: '',
   colGiffys: [],
   rotspeed: 0,
@@ -51,6 +55,7 @@ var ant3d = {
       }
             
     return col;
+
   },
   getWikiData: function (SearchTerm, callback) {
     $.ajax({
@@ -61,104 +66,129 @@ var ant3d = {
       ant3d.colHeadings.length = 0;
       ant3d.colArticles.length = 0;
       ant3d.colLinks.length = 0;
+
+
       $.each(jsondata[1], function (index, value) {
         ant3d.colHeadings.push(value);
         ant3d.colArticles.push(jsondata[2][index]);
         ant3d.colLinks.push(jsondata[3][index]);
+
       })
+
       callback();
     });
+
   },
   GetGiffys: function (inSrch, callback) {
     let gkey = "aGpceXfwMY5TKtoH39N128oj2HirwBKv";
     let offset = Math.floor(Math.random() * 125);
     ant3d.colMovs.length = 0;
     $.ajax({
-      url: "https://api.giphy.com/v1/gifs/search?api_key=" + gkey + "&q='" + inSrch + "'&offset=" + offset + "&limit=3",
+      url: "https://api.giphy.com/v1/gifs/search?rating=pg-13&api_key=" + gkey + "&q='" + inSrch + "'&offset=" + offset + "&limit=3",
       method: "GET"
     }).then(function (response) {
       ant3d.colGiffys.length = 0;
+
       for (i = 0; i < response.data.length; i++) {
         let rd = response.data[i];
         let gif = rd.images.looping.mp4;
+
         ant3d.colGiffys.push(gif);
       }
+
       callback(inSrch, ant3d.GenerateObjects);
+
     });
   },
   RunVideos: function(){
+      if (ant3d.iOS()){
+        //change behavior on iPhone to handle: Apple 'ALL VIDEO FULL SCREEN' decision.
+        return;
+      }
       let video = document.getElementById('myvideo');
       let video2 = document.getElementById('myvideo2');
       let video3 = document.getElementById('myvideo3');
       
       video.loop = true;
       video.play();
+
       video2.loop = true;
       video2.play();
+
       video3.loop = true;
       video3.play();
   },
   Resize: function (){
-    ant3d.myheight = window.innerHeight * ant3d.Hcoef;
-    ant3d.mywidth = window.innerWidth * ant3d.Wcoef;
+       
+    ant3d.myheight = window.innerHeight * ant3d.Hcoef;;
+    ant3d.mywidth = ant3d.jRightHereBaby.outerWidth()  * ant3d.Wcoef;//window.innerWidth * ant3d.Wcoef;
     ant3d.camera = new THREE.PerspectiveCamera(75, (ant3d.mywidth / ant3d.myheight), 0.1, 1000);
     ant3d.renderer.setSize(ant3d.mywidth, ant3d.myheight);
   },
   StartUp: function (inJQueryDomElement, inSrch) {
     //Code that sets up your initial sceen here
+
+    ant3d.jRightHereBaby = inJQueryDomElement;
     ant3d.colGiffys.length = 0;
     ant3d.rotspeed = 0;
-    ant3d.myheight = window.innerHeight * ant3d.Hcoef;;
-    ant3d.mywidth = window.innerWidth * ant3d.Wcoef;
+
+    
+  
+    
+
     while (ant3d.scene.children.length > 0) { ant3d.scene.remove(ant3d.scene.children[0]); }
     ant3d.renderer.renderLists.dispose();
+
     ant3d.scene = new THREE.Scene();
     ant3d.renderer = new THREE.WebGLRenderer();
-    
-    ant3d.camera = new THREE.PerspectiveCamera(75, (ant3d.mywidth / ant3d.myheight), 0.1, 1000);
-    ant3d.renderer.setSize(ant3d.mywidth, ant3d.myheight);
+  
+
+    //ant3d.myheight = ant3d.jRightHereBaby.height() * ant3d.Hcoef;//window.innerHeight * ant3d.Hcoef;;
+    //ant3d.mywidth = ant3d.jRightHereBaby.width()  * ant3d.Wcoef;//window.innerWidth * ant3d.Wcoef;
+    //ant3d.camera = new THREE.PerspectiveCamera(75, (ant3d.mywidth / ant3d.myheight), 0.1, 1000);
+    //ant3d.renderer.setSize(ant3d.mywidth, ant3d.myheight);
+    ant3d.Resize();
+
     ant3d.colMovs.length = 0;
     ant3d.colHeadings.length = 0;
     ant3d.colArticles.length = 0;
     ant3d.colLinks.length = 0;
     inJQueryDomElement.empty();
+
     ant3d.NewTex = '',
-      ant3d.NewTex2 = '',
-      ant3d.NewTex3 = '',
-      ant3d.camera.position.z = 0;
+    ant3d.NewTex2 = '',
+    ant3d.NewTex3 = '',
+
+    ant3d.camera.position.z = 0;
     
-    inJQueryDomElement.append(ant3d.renderer.domElement);
-    
+    inJQueryDomElement.append(ant3d.renderer.domElement);    
     
     $(document).off('click');
     $(document).on('click', function (e) {
       
       ant3d.mylastevent = e;
       ant3d.RunVideos();
-       
-      
-      
+
     });
     //inJQueryDomElement = $('.mycanvas');
     $(document).off('touchstart');
     $(document).on('touchstart', function (e) {
-      e.preventDefault();
-      
       ant3d.mylastevent = e;
       ant3d.RunVideos();
     });
     $(document).off('touchend');
     $(document).on('touchend', function (e) {
-      e.preventDefault();
+      
       ant3d.DeltaX = ant3d.mylastevent.originalEvent.touches[0].pageX - e.originalEvent.changedTouches[0].pageX;
       
       ant3d.ant3dMouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-          ant3d.ant3dMouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+		  ant3d.ant3dMouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
       ant3d.bFireDetectObjectsUnderMouse = true
       
       ant3d.mylastevent = e;
       ant3d.rotspeed = ant3d.DeltaX * .0001;
       ant3d.RunVideos();
+
     });
     $(document).off('mousedown');
     $(document).on('mousedown', function (e) {
@@ -166,7 +196,7 @@ var ant3d = {
       ant3d.mylastevent = e;
       ant3d.RunVideos();
       ant3d.ant3dMouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-          ant3d.ant3dMouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+		  ant3d.ant3dMouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
       ant3d.bFireDetectObjectsUnderMouse = true;
      
     });
@@ -177,8 +207,11 @@ var ant3d = {
       ant3d.mylastevent = e;
       ant3d.RunVideos();
     });
+
     
     ant3d.GetGiffys(inSrch, ant3d.getWikiData);
+
+
   },
   GetTextArray: function (inText, inLineLen) {
     //This function wraps text el-manuel aan.
@@ -203,22 +236,33 @@ var ant3d = {
     return col;
   },
   GenerateCube: function (name, x, y, z, inTitle, inArticle, inLink) {
+
     //this code generates a cube, either text or image... atm
     let geometry = new THREE.BoxGeometry(7, 3.5, 1);
+
     ant3d.tempcanvas = document.createElement("canvas");
     let xc = ant3d.tempcanvas.getContext("2d");
+
+
+
+
+
     xc.textBaseline = 'top';
     /// color for background    
     xc.fillStyle = "blue";
     xc.width = xc.height = 128;
+
     xc.shadowColor = "#000";
     xc.fillRect(0, 0, ant3d.tempcanvas.width, ant3d.tempcanvas.height);
     xc.shadowBlur = 7;
     xc.fillStyle = "white";
     xc.font = "15pt arial bold";
+
+
     let ypos = 5;
     $.each(ant3d.GetTextArray(inTitle, 30),
       function (i, item) {
+
         xc.fillText(item, 5, ypos);
         ypos += 15;
       });
@@ -229,6 +273,7 @@ var ant3d = {
         xc.fillText(item, 10, ypos);
         ypos += 12;
       });
+
     //add map here
     let xm = '';
     let myrnd = Math.random();
@@ -259,8 +304,11 @@ var ant3d = {
         xm.map.needsUpdate = true;
         break;
     }
+
+
     let material = new THREE.MeshFaceMaterial([
       new THREE.MeshBasicMaterial({
+
         color: 0x1b1b88
         //map: anthead
         //four rot right
@@ -271,12 +319,12 @@ var ant3d = {
         // map: anthead
       }),
       new THREE.MeshBasicMaterial({
-        color: 0xeef06e
+        color: 0xef6c00//0xeef06e
         //top
         //  map: anthead
       }),
       new THREE.MeshBasicMaterial({
-        color: 0x95970a //bottom
+        color: 0xef6c00//0x95970a //bottom
         //map: anthead
       }),
       xm, //Front built external
@@ -307,19 +355,18 @@ var ant3d = {
     video2.setAttribute('crossorigin', 'anonymous');
     let video3 = document.getElementById('myvideo3');
     video3.setAttribute('crossorigin', 'anonymous');
+
     video.src = ant3d.colGiffys[0];
     video2.src = ant3d.colGiffys[1];
     video3.src = ant3d.colGiffys[2];
   
     video.load();
-    $(video).on('loadeddata', function() {e.preventDefault;});
     //video.addEventListener('loadeddata', function () {
       video2.load();
-      $(video2).on('loadeddata', function() {e.preventDefault;});
     //  video2.addEventListener('loadeddata', function () {
         video3.load();
     //    video3.addEventListener('loadeddata', function () {
-      $(video3).on('loadeddata', function() {e.preventDefault;});
+
           video.loop = true;
           video.play();
           video2.loop = true;
@@ -332,19 +379,26 @@ var ant3d = {
           texture1.magFilter = THREE.LinearFilter;
           texture1.format = THREE.RGBFormat;
           texture1.needsUpdate = true;
+
           let texture2 = new THREE.VideoTexture(video2);
           texture2.minFilter = THREE.LinearFilter;
           texture2.magFilter = THREE.LinearFilter;
           texture2.format = THREE.RGBFormat;
           texture2.needsUpdate = true;
+
           let texture3 = new THREE.VideoTexture(video3);
           texture3.minFilter = THREE.LinearFilter;
           texture3.magFilter = THREE.LinearFilter;
           texture3.format = THREE.RGBFormat;
           texture3.needsUpdate = true;
+
+
           ant3d.NewTex = texture1
           ant3d.NewTex2 = texture2
           ant3d.NewTex3 = texture3
+
+
+
           let artid = 0;
           for (let i = 0; i < 10; i++) {
             // Video is loaded and can be played
@@ -354,6 +408,7 @@ var ant3d = {
             let myLink = ant3d.colLinks[artid];
             if(artid<9){artid++};
             
+
             cuby = -4;
             let xz = ant3d.rotate(0, 0, cubx, cubz, ((360 / 10) * i));
             let cubeA = ant3d.GenerateCube('cubeA' + i, xz[0], cuby, xz[1], myTitle, myArticle, myLink);
@@ -363,9 +418,11 @@ var ant3d = {
             myArticle = ant3d.colArticles[artid];
             myLink = ant3d.colLinks[artid];
             if(artid<9){artid++};
+
             cuby = 0;
             xy = ant3d.rotate(0, 0, cuby, cubx, ((360 / 10) * i));
             let cubeB = ant3d.GenerateCube('cubeB' + i, xz[0], cuby, xz[1], myTitle, myArticle, myLink);
+
             myTitle = ant3d.colHeadings[artid];
             myArticle = ant3d.colArticles[artid];
             myLink = ant3d.colLinks[artid];
@@ -374,9 +431,11 @@ var ant3d = {
             cuby = 4;
             xy = ant3d.rotate(0, 0, cuby, cubx, ((360 / 10) * i));
             let cubeC = ant3d.GenerateCube('cubeC' + i, xz[0], cuby, xz[1], myTitle, myArticle, myLink);
+
             ant3d.scene.add(cubeA, cubeB, cubeC);
           }
           requestAnimationFrame(ant3d.Animate);
+
   //      }, false);
   //    }, false);
   //  }, false);
@@ -401,6 +460,7 @@ var ant3d = {
       item.rotation.y += -ant3d.rotspeed;
     });
     ant3d.renderer.render(ant3d.scene, ant3d.camera);
+
     ant3d.rotspeed = ant3d.rotspeed * ant3d.friction;
     requestAnimationFrame(ant3d.Animate);
   },
@@ -411,6 +471,22 @@ var ant3d = {
       nx = (cos * (x - cx)) + (sin * (y - cy)) + cx,
       ny = (cos * (y - cy)) - (sin * (x - cx)) + cy;
     return [nx, ny];
+  },
+  iOS: function() {
+    var iDevices = [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ];  
+    if (!!navigator.platform) {
+      while (iDevices.length) {
+        if (navigator.platform === iDevices.pop()){ return true; }
+      }
+    }  
+    return false;
   }
 }
 $(document).ready(function () {
