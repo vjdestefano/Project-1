@@ -9,8 +9,8 @@
 var ant3d = {
   friction: .995,
   DeltaX: 0,
-  Wcoef: 1,
-  Hcoef: .6,
+  Wcoef: .8,
+  Hcoef: .8,
   jRightHereBaby: '',
   tempcanvas: '',
   colGiffys: [],
@@ -174,15 +174,16 @@ var ant3d = {
     $(document).off('touchstart');
     $(document).on('touchstart', function (e) {
       ant3d.mylastevent = e;
+      ant3d.UpdateMouse(e);
       ant3d.RunVideos();
     });
     $(document).off('touchend');
     $(document).on('touchend', function (e) {
       
+      ant3d.UpdateMouse(e);
       ant3d.DeltaX = ant3d.mylastevent.originalEvent.touches[0].pageX - e.originalEvent.changedTouches[0].pageX;
+      console.log(ant3d.DeltaX);
       
-      ant3d.ant3dMouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-		  ant3d.ant3dMouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
       ant3d.bFireDetectObjectsUnderMouse = true
       
       ant3d.mylastevent = e;
@@ -194,15 +195,16 @@ var ant3d = {
     $(document).on('mousedown', function (e) {
       
       ant3d.mylastevent = e;
-      ant3d.RunVideos();
-      ant3d.ant3dMouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-		  ant3d.ant3dMouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+      ant3d.UpdateMouse(e);      
+      
       ant3d.bFireDetectObjectsUnderMouse = true;
-     
+      ant3d.RunVideos();     
     });
     $(document).off('mouseup');
     $(document).on('mouseup', function (e) {
+      ant3d.UpdateMouse(e);
       ant3d.DeltaX = ant3d.mylastevent.clientX - e.clientX;
+      console.log(ant3d.DeltaX);
       ant3d.rotspeed = ant3d.DeltaX * .0001;
       ant3d.mylastevent = e;
       ant3d.RunVideos();
@@ -212,6 +214,13 @@ var ant3d = {
     ant3d.GetGiffys(inSrch, ant3d.getWikiData);
 
 
+  },
+  UpdateMouse: function (e){
+    console.log(e);
+    //ant3d.ant3dMouse.x = ( e.clientX / (ant3d.jRightHereBaby.innerWidth * ant3d.Wcoef) ) * 2 - 1;
+    //ant3d.ant3dMouse.y = - ( e.clientY / (ant3d.jRightHereBaby.innerHeight * ant3d.Hcoef) ) * 2 + 1;
+    ant3d.ant3dMouse.x = ( e.clientX / (window.innerWidth * ant3d.Wcoef) ) * 2 - 1;
+    ant3d.ant3dMouse.y = - ( e.clientY / (window.innerHeight * ant3d.Hcoef) ) * 2 + 1;
   },
   GetTextArray: function (inText, inLineLen) {
     //This function wraps text el-manuel aan.
