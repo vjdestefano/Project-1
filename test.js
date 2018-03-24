@@ -1,10 +1,10 @@
 function bTogglePage(bRequest3dOpen){
 if(bRequest3dOpen){
-$("#the3Dbox").show();
-$("#youTubeVid").hide();
+$("#the3Dbox").slideToggle();
+$("#youTubeVid").slideToggle();
 }else{
-  $("#the3Dbox").hide();
-  $("#youTubeVid").show();
+  $("#the3Dbox").slideToggle();
+  $("#youTubeVid").slideToggle();
 }
 ant3d.Resize();
 }
