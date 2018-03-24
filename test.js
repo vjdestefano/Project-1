@@ -96,9 +96,11 @@ $("#searchTest").on("keyup", function(event) {
     $("#searchBarMain").val("");
    
     if (!b3dOpen){
-      
+      $("#youTubeVid").slideToggle();
       $("#the3Dbox").slideToggle();
+
       b3dOpen = true;
+      ant3d.Resize();
     }
     
 
