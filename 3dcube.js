@@ -576,17 +576,17 @@ var ant3d = {
   }
 }
 $(document).ready(function () {
-  ant3d.StartUp($("#rightherebaby"), 'Programming', tryme);
+  ant3d.StartUp($("#rightherebaby"), 'Programming', displayFrom3D);
   $(window).on('resize', function () { ant3d.Resize(); });
   $('#search').on('click', function () {
     //calling ant3d.Startup example...
     //ant3d.StartUp(jQueryDomElement, SearchText);   
-    ant3d.StartUp($("#rightherebaby"), $('#input').val(), tryme);
+    ant3d.StartUp($("#rightherebaby"), $('#input').val(), displayFrom3D);
     $('#input').val('');
   });
   $('#input').on('keyup', function (e) {
     if (e.key === 'Enter') {
-      ant3d.StartUp($("#rightherebaby"), $('#input').val(), tryme);
+      ant3d.StartUp($("#rightherebaby"), $('#input').val(), displayFrom3D);
       $('#input').val('');
     }
   });
