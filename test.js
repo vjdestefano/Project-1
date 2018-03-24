@@ -104,6 +104,7 @@ $("#searchTest").on("keyup", function(event) {
   event.preventDefault();
   if (event.key === "Enter") {
     event.preventDefault();
+    bTogglePage(true);
     var testKey = $("#searchBarMain").val();
     console.log(testKey);
     //$(".test").text(testKey);
@@ -114,7 +115,7 @@ $("#searchTest").on("keyup", function(event) {
     playPause.restart();
     playPause.play();
     $("#searchBarMain").val("");
-   bTogglePage(true);
+   
     // if (!b3dOpen){
     //   $("#youTubeVid").slideToggle();
     //   tubeOpen = false;
