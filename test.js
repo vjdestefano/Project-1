@@ -139,9 +139,9 @@ function displayFrom3D(giff, youtube, speechText){
     testVid.attr("style","display: none;")
     testVid.attr("id", "testVid");
     testVid.attr("width",$('#youTubeVid').innerWidth());
+    testVid.attr("height",($('#youTubeVid').innerWidth() * .61))
     console.log(testVid);
     $("#youTubeVid").append(testVid);
-
   }
 
 
