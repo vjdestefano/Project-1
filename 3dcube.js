@@ -4,9 +4,6 @@
 //It currently displays data from the API's: Wikipedia, Giffy
 //The script is interfaced by calling the ant3d.Startup method
 //with the parameters SearchText, $(DomElement). See bottom of code for example.
-function tryme(giff, youtube, mtext) {
-  $('#output').text(giff + ' ' + youtube + ' ' + mtext);
-}
 var ant3d = {
   bFirstTime: true,
   bDblClick: false,
@@ -536,9 +533,9 @@ var ant3d = {
         ant3d.CurGiffy = graObj[0].object.MyGiffyLink;
         ant3d.CurYouTube = graObj[0].object.YouTubeId.videoId;
         ant3d.ReadText = graObj[0].object.Title + ' ' + graObj[0].object.Article;
-        //setTimeout(function () {
+        setTimeout(function () {          
           ant3d.callpage(ant3d.CurGiffy, ant3d.CurYouTube, ant3d.ReadText);          
-        //''}, 1);
+        }, 1);
         ant3d.bDblClick=false;
       }      
     };
