@@ -116,4 +116,9 @@ $("#openButton").on("click", function() {
   $("#openButton").toggle();
 });
 
-function displayFrom3D(youTube, wiki, speechText) {}
+function displayFrom3D(giff, youtube, speechText){
+  window.alert(giff,youtube, speechText);
+}
+
+
+
