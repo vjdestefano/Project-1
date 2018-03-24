@@ -77,6 +77,9 @@ $(".collapsible-header").on("click", function(event) {
   clickAnime.play();
 });
 
+var b3dOpen = true;
+
+
 $("#searchTest").on("keyup", function(event) {
   event.preventDefault();
   if (event.key === "Enter") {
@@ -91,7 +94,14 @@ $("#searchTest").on("keyup", function(event) {
     playPause.restart();
     playPause.play();
     $("#searchBarMain").val("");
+   
+    if (!b3dOpen){
+      $("#the3Dbox").slideToggle();
+    }
+    
 
+    
+    
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
     msg.text = "searching for " + testKey;
@@ -104,6 +114,7 @@ $("#searchTest").on("keyup", function(event) {
 
 $("#closeButton").on("click", function() {
   $("#the3Dbox").slideToggle();
+  b3dOpen = false;
   $("#testVid").slideToggle();
   $("#openButton").toggle();
   $("#closeButton").toggle();
@@ -111,6 +122,7 @@ $("#closeButton").on("click", function() {
 
 $("#openButton").on("click", function() {
   $("#the3Dbox").slideToggle();
+  b3dOpen = true;
   $("#testVid").slideToggle();
   $("#closeButton").toggle();
   $("#openButton").toggle();
@@ -143,6 +155,7 @@ function displayFrom3D(giff, youtube, speechText){
     console.log(testVid);
     $("#youTubeVid").append(testVid);
     $("#the3Dbox").slideToggle();
+    b3dOpen = false;
     
   }
 
