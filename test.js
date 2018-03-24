@@ -142,6 +142,8 @@ function displayFrom3D(giff, youtube, speechText){
     testVid.attr("height",($('#youTubeVid').innerWidth() * .61))
     console.log(testVid);
     $("#youTubeVid").append(testVid);
+    $("#the3Dbox").slideToggle();
+    
   }
 
 
