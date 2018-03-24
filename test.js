@@ -1,3 +1,21 @@
+function bTogglePage(bRequest3dOpen){
+if(bRequest3dOpen){
+$("#the3Dbox").show();
+$("#youTubeVid").hide();
+}else{
+  $("#the3Dbox").hide();
+  $("#youTubeVid").show();
+}
+}
+
+
+
+
+
+
+
+
+
 var playPause = anime({
   targets: "#domAttributes .test",
   width: [
@@ -77,7 +95,8 @@ $(".collapsible-header").on("click", function(event) {
   clickAnime.play();
 });
 
-var b3dOpen = true;
+// var b3dOpen = true;
+// var tubeOpen = false;
 
 
 $("#searchTest").on("keyup", function(event) {
@@ -94,14 +113,15 @@ $("#searchTest").on("keyup", function(event) {
     playPause.restart();
     playPause.play();
     $("#searchBarMain").val("");
-   
-    if (!b3dOpen){
-      $("#youTubeVid").slideToggle();
-      $("#the3Dbox").slideToggle();
+   bTogglePage(true);
+    // if (!b3dOpen){
+    //   $("#youTubeVid").slideToggle();
+    //   tubeOpen = false;
+    //   $("#the3Dbox").slideToggle();
 
-      b3dOpen = true;
-      ant3d.Resize();
-    }
+    //   b3dOpen = true;
+    //   ant3d.Resize();
+    // }
     
 
     
@@ -116,21 +136,21 @@ $("#searchTest").on("keyup", function(event) {
   }
 });
 
-$("#closeButton").on("click", function() {
-  $("#the3Dbox").slideToggle();
-  b3dOpen = true;
-  $("#testVid").slideToggle();
-  $("#openButton").toggle();
-  $("#closeButton").toggle();
-});
+// $("#closeButton").on("click", function() {
+//   $("#the3Dbox").slideToggle();
+//   b3dOpen = true;
+//   $("#youTubeVid").slideToggle();
+//   $("#openButton").toggle();
+//   $("#closeButton").toggle();
+// });
 
-$("#openButton").on("click", function() {
-  $("#the3Dbox").slideToggle();
-  b3dOpen = false;
-  $("#testVid").slideToggle();
-  $("#closeButton").toggle();
-  $("#openButton").toggle();
-});
+// $("#openButton").on("click", function() {
+//   $("#the3Dbox").slideToggle();
+//   b3dOpen = false;
+//   $("#youTubeVid").slideToggle();
+//   $("#closeButton").toggle();
+//   $("#openButton").toggle();
+// });
 
 function displayFrom3D(giff, youtube, speechText){
   console.log(youtube);
@@ -158,8 +178,11 @@ function displayFrom3D(giff, youtube, speechText){
     testVid.attr("height",($('#youTubeVid').innerWidth() * .61))
     console.log(testVid);
     $("#youTubeVid").append(testVid);
-    $("#the3Dbox").slideToggle();
-    b3dOpen = false;
+    bTogglePage(false);
+    // $("#the3Dbox").slideToggle();
+    // tubeOpen = true;
+
+    // b3dOpen = false;
     
   }
 
