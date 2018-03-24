@@ -144,7 +144,7 @@ var ant3d = {
     ant3d.CurGiffy = '';
     ant3d.CurYouTube = '';
     ant3d.ReadText = '';
-    ant3d.callpage = inOutCallback;
+ 
     ant3d.jRightHereBaby = inJQueryDomElement;
     ant3d.colGiffys.length = 0;
     ant3d.rotspeed = 0;
@@ -171,6 +171,7 @@ var ant3d = {
     ant3d.camera.position.z = 0;
     inJQueryDomElement.append(ant3d.renderer.domElement);
     if(ant3d.bFirstTime){
+      ant3d.callpage = inOutCallback;
       ant3d.bFirstTime = false;
    //   $(document).off('dblclick');
       $(document).on('dblclick',
