@@ -118,7 +118,7 @@ $("#searchTest").on("keyup", function(event) {
 
 $("#closeButton").on("click", function() {
   $("#the3Dbox").slideToggle();
-  b3dOpen = false;
+  b3dOpen = true;
   $("#testVid").slideToggle();
   $("#openButton").toggle();
   $("#closeButton").toggle();
@@ -126,7 +126,7 @@ $("#closeButton").on("click", function() {
 
 $("#openButton").on("click", function() {
   $("#the3Dbox").slideToggle();
-  b3dOpen = true;
+  b3dOpen = false;
   $("#testVid").slideToggle();
   $("#closeButton").toggle();
   $("#openButton").toggle();
