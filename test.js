@@ -134,11 +134,11 @@ function displayFrom3D(giff, youtube, speechText){
   console.log(youtube);
   if(youtube){
     console.log(typeof youtube);
-    //$("#youTubeVid").empty();
+    $("#youTubeVid").empty();
     var testVid = $("<iframe>").attr("src","https://www.youtube.com/embed/" + youtube);
     testVid.attr("style","display: none;")
     testVid.attr("id", "testVid");
-    //testVid.attr("width",$('#youTubeVid').innerWidth());
+    testVid.attr("width",$('#youTubeVid').innerWidth());
     console.log(testVid);
     $("#youTubeVid").append(testVid);
 
