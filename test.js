@@ -117,7 +117,31 @@ $("#openButton").on("click", function() {
 });
 
 function displayFrom3D(giff, youtube, speechText){
-  window.alert(giff,youtube, speechText);
+  console.log(youtube);
+  console.log(speechText);
+  console.log(giff);
+  if(speechText){
+    
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.text = speechText;
+    msg.pitch = 0.5;
+    msg.rate = 0.4;
+
+    window.speechSynthesis.speak(msg);
+  }
+
+  console.log(youtube);
+  if(youtube){
+    console.log(typeof youtube);
+  }
+
+
+  console.log(giff);
+  if(giff){
+    console.log(typeof giff);
+  }
+
 }
 
 
