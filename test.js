@@ -6,6 +6,7 @@ $("#youTubeVid").hide();
   $("#the3Dbox").hide();
   $("#youTubeVid").show();
 }
+ant3d.Resize();
 }
 
 
