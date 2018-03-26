@@ -1,20 +1,35 @@
+
+var closeYouTube = false;
+
+
 function bTogglePage(bRequest3dOpen){
 if(bRequest3dOpen){
-$("#the3Dbox").show();
-
-$("#youTubeVid").hide();
+$("#youTubeVid").hide(500);
+$("#the3Dbox").slideDown(750);
+closeYouTube = false;
+if(!closeYouTube){
+  $("#closeButton").attr("style","display: none;");
+}
 }else{
-  $("#the3Dbox").hide();
-  $("#youTubeVid").show();
+  $("#the3Dbox").hide(500);
+  $("#youTubeVid").slideDown(750);
+  closeYouTube = true
+  if(closeYouTube){
+    $("#closeButton").attr("style","");
+  }
 }
-ant3d.Resize();
+window.setTimeout(ant3d.Resize(),900);
 }
 
+$("#closeButton").on("click", function() {
+  $("#the3Dbox").slideToggle();
+  //   b3dOpen = true;
+  $("#youTubeVid").slideToggle();
+  //   $("#openButton").toggle();
+  $("#closeButton").toggle();
 
-
-
-
-
+  ant3d.Resize();
+  });
 
 
 
@@ -63,7 +78,7 @@ var clickAnime = anime({
   targets: ".clickThis",
   width: [
     {
-      value: "335px",
+      value: ($('.collapsible-header').innerWidth() * 1),
       duration: 500,
       elasticity: 100,
       easing: "easeInOutQuart",
@@ -104,9 +119,22 @@ $(".collapsible-header").on("click", function(event) {
 $("#searchTest").on("keyup", function(event) {
   event.preventDefault();
   if (event.key === "Enter") {
-    event.preventDefault();
+
+  var testKey = $("#searchBarMain").val();
+  console.log(testKey);
+  if(testKey.length === 0){
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.text = "Please search for a valid term!";
+    msg.pitch = 0.5;
+    msg.rate = 0.4;
+
+    window.speechSynthesis.speak(msg);
+    return
+  } else {
+ event.preventDefault();
     bTogglePage(true);
-    var testKey = $("#searchBarMain").val();
+   
     console.log(testKey);
     //$(".test").text(testKey);
     $("#test1").text(testKey);
@@ -116,15 +144,7 @@ $("#searchTest").on("keyup", function(event) {
     playPause.restart();
     playPause.play();
     $("#searchBarMain").val("");
-   
-    // if (!b3dOpen){
-    //   $("#youTubeVid").slideToggle();
-    //   tubeOpen = false;
-    //   $("#the3Dbox").slideToggle();
-
-    //   b3dOpen = true;
-    //   ant3d.Resize();
-    // }
+   ant3d.Resize();
     
 
     
@@ -136,16 +156,13 @@ $("#searchTest").on("keyup", function(event) {
     msg.rate = 0.4;
 
     window.speechSynthesis.speak(msg);
+
+  }
+   
   }
 });
 
-// $("#closeButton").on("click", function() {
-//   $("#the3Dbox").slideToggle();
-//   b3dOpen = true;
-//   $("#youTubeVid").slideToggle();
-//   $("#openButton").toggle();
-//   $("#closeButton").toggle();
-// });
+
 
 // $("#openButton").on("click", function() {
 //   $("#the3Dbox").slideToggle();
@@ -173,15 +190,16 @@ function displayFrom3D(giff, youtube, speechText){
   console.log(youtube);
   if(youtube){
     console.log(typeof youtube);
-    $("#youTubeVid").empty();
+    $("#youTubeVid").empty();  
+    bTogglePage(false);
     var testVid = $("<iframe>").attr("src","https://www.youtube.com/embed/" + youtube);
     //testVid.attr("style","display: none;")
     testVid.attr("id", "testVid");
-    testVid.attr("width",($('#youTubeVid').innerWidth() * .8));
+    testVid.attr("width",($('#youTubeVid').innerWidth() * 1));
     testVid.attr("height",($('#youTubeVid').innerWidth() * .61))
     console.log(testVid);
     $("#youTubeVid").append(testVid);
-    bTogglePage(false);
+  
     // $("#the3Dbox").slideToggle();
     // tubeOpen = true;
 
