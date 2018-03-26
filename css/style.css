@@ -106,3 +106,7 @@ a {
 #the3Dbox,#youTubeVid.card {
   background-color: #ef6c00 !important;
 }
+
+#headerFont{
+  font-size: 10px;
+}
