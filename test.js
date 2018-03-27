@@ -1,3 +1,38 @@
+
+var closeYouTube = false;
+
+
+function bTogglePage(bRequest3dOpen){
+if(bRequest3dOpen){
+$("#youTubeVid").hide(500);
+$("#the3Dbox").slideDown(750);
+closeYouTube = false;
+if(!closeYouTube){
+  $("#closeButton").attr("style","display: none;");
+}
+}else{
+  $("#the3Dbox").hide(500);
+  $("#youTubeVid").slideDown(750);
+  closeYouTube = true
+  if(closeYouTube){
+    $("#closeButton").attr("style","");
+  }
+}
+window.setTimeout(ant3d.Resize(),900);
+}
+
+$("#closeButton").on("click", function() {
+  $("#the3Dbox").slideToggle();
+  //   b3dOpen = true;
+  $("#youTubeVid").slideToggle();
+  //   $("#openButton").toggle();
+  $("#closeButton").toggle();
+
+  ant3d.Resize();
+  });
+
+
+
 var playPause = anime({
   targets: "#domAttributes .test",
   width: [
@@ -43,7 +78,7 @@ var clickAnime = anime({
   targets: ".clickThis",
   width: [
     {
-      value: "335px",
+      value: ($('.collapsible-header').innerWidth() * 1),
       duration: 500,
       elasticity: 100,
       easing: "easeInOutQuart",
@@ -77,11 +112,29 @@ $(".collapsible-header").on("click", function(event) {
   clickAnime.play();
 });
 
+// var b3dOpen = true;
+// var tubeOpen = false;
+
+
 $("#searchTest").on("keyup", function(event) {
   event.preventDefault();
   if (event.key === "Enter") {
-    event.preventDefault();
-    var testKey = $("#searchBarMain").val();
+
+  var testKey = $("#searchBarMain").val();
+  console.log(testKey);
+  if(testKey.length === 0){
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.text = "Please search for a valid term!";
+    msg.pitch = 0.5;
+    msg.rate = 0.4;
+
+    window.speechSynthesis.speak(msg);
+    return
+  } else {
+ event.preventDefault();
+    bTogglePage(true);
+   
     console.log(testKey);
     //$(".test").text(testKey);
     $("#test1").text(testKey);
@@ -91,27 +144,76 @@ $("#searchTest").on("keyup", function(event) {
     playPause.restart();
     playPause.play();
     $("#searchBarMain").val("");
+   ant3d.Resize();
+    
 
+    
+    
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
-    msg.text = testKey;
+    msg.text = "searching for " + testKey;
+    msg.pitch = 0.5;
+    msg.rate = 0.4;
+
+    window.speechSynthesis.speak(msg);
+
+  }
+   
+  }
+});
+
+
+
+// $("#openButton").on("click", function() {
+//   $("#the3Dbox").slideToggle();
+//   b3dOpen = false;
+//   $("#youTubeVid").slideToggle();
+//   $("#closeButton").toggle();
+//   $("#openButton").toggle();
+// });
+
+function displayFrom3D(giff, youtube, speechText){
+  console.log(youtube);
+  console.log(speechText);
+  console.log(giff);
+  if(speechText){
+    
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.text = speechText;
     msg.pitch = 0.5;
     msg.rate = 0.4;
 
     window.speechSynthesis.speak(msg);
   }
-});
 
-$("#closeButton").on("click", function() {
-  $("#the3Dbox").slideToggle();
-  $("#openButton").toggle();
-  $("#closeButton").toggle();
-});
+  console.log(youtube);
+  if(youtube){
+    console.log(typeof youtube);
+    $("#youTubeVid").empty();  
+    bTogglePage(false);
+    var testVid = $("<iframe>").attr("src","https://www.youtube.com/embed/" + youtube);
+    //testVid.attr("style","display: none;")
+    testVid.attr("id", "testVid");
+    testVid.attr("width",($('#youTubeVid').innerWidth() * 1));
+    testVid.attr("height",($('#youTubeVid').innerWidth() * .61))
+    console.log(testVid);
+    $("#youTubeVid").append(testVid);
+  
+    // $("#the3Dbox").slideToggle();
+    // tubeOpen = true;
 
-$("#openButton").on("click", function() {
-  $("#the3Dbox").slideToggle();
-  $("#closeButton").toggle();
-  $("#openButton").toggle();
-});
+    // b3dOpen = false;
+    
+  }
 
-function displayFrom3D(youTube, wiki, speechText) {}
+
+  console.log(giff);
+  if(giff){
+    console.log(typeof giff);
+  }
+
+}
+
+
+
