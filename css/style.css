@@ -1,3 +1,6 @@
+.nav-wrapper{
+  padding-bottom: 5%;
+}
 #test {
   margin: 0;
 }
@@ -106,7 +109,15 @@ a {
 #the3Dbox,#youTubeVid.card {
   background-color: #ef6c00 !important;
 }
-
-#headerFont{
-  font-size: 10px;
+.navBarPic{
+  display: block;
+}
+.copy{  
+  position: relative;
+  top: -15px;
+  padding: 0 0 0 70%;  
+  margin: 0 0 6% 0;
+  font-size: .8em;
+  z-index: 25;
+  color: #000; 
 }

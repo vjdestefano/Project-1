@@ -1,6 +1,3 @@
-//Vincent DeStefano
-// 3/26/2018
-
 
 var closeYouTube = false;
 
@@ -26,9 +23,9 @@ window.setTimeout(ant3d.Resize(),900);
 
 $("#closeButton").on("click", function() {
   $("#the3Dbox").slideToggle();
-
+  //   b3dOpen = true;
   $("#youTubeVid").slideToggle();
-
+  //   $("#openButton").toggle();
   $("#closeButton").toggle();
 
   ant3d.Resize();
