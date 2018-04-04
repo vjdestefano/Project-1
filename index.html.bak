@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Cycler</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Compiled and minified CSS   -->
+  <!-- Compiled and minified CSS -->
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
@@ -18,7 +18,7 @@
 <body>
 
   <nav>
-    <div id="mynav" class="nav-wrapper #ef6c00 orange darken-3">      
+    <div class="nav-wrapper #ef6c00 orange darken-3">
       <img id="navBarPic" class="center brand-logo" src="images/coollogo_com-29055133.png" height="75px" width="180px"></img>
       <div class='copy'>©2018 ant, vin, abu</div>
       
@@ -52,9 +52,7 @@
 
               <label for="searchBarMain">
                 <i class="material-icons">search</i>Search Here!</label>
-                
             </div>
-            
             <div id="domAttributes">
               <div class="test valign-wrapper center-align">
                 <div id="JSobjectProp">
@@ -71,16 +69,12 @@
 
 
 
-        
+
 
       </div>
-      <a id="Coast" class="btn-floating btn-large waves-effect waves-light #ef6c00 orange darken-3"><i class="material-icons">directions_bike</i></a>      
-      <a id="Pedal" class="btn-floating btn-large waves-effect waves-light #ef6c00 orange darken-3"><i class="material-icons">rotate_left</i></a>
-      <a id="Break" class="btn-floating btn-large waves-effect waves-light #ef6c00 orange darken-3"><i class="material-icons">rotate_right</i></a>
-      <a id="About" class="btn-floating btn-large waves-effect waves-light #ef6c00 orange darken-3"><i class="material-icons">help_outline</i></a>
 
-      
-           <div class="row">
+
+      <div class="row">
 
         <div id="the3Dbox" class="card col s12 m12 l12">
           <div class="card-image waves-effect waves-block waves-light  z-depth-3">
