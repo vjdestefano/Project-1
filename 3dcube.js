@@ -1,5 +1,5 @@
 //A.Napolitano  03/22/2018
-//v.0.0.0.1.3 - 04/04/2018
+//v.0.0.0.1.7 - 04/04/2018
 //ant3d is a simple api extraction and 3d interface written in THREE.js
 //It currently displays data from the API's: Wikipedia, Giffy and You Tube
 //The script is interfaced by calling the ant3d.Startup method
@@ -11,6 +11,7 @@
 //--Moved copyright.
 //--A.A.N 3/28/2018
 //--YouTube Api/gapiMasterment contributed by Abu.
+//--A.A.N 4/4/2018 adjusting cowbell...
 var ant3d = {
   bFirstTime: true,
   bDblClick: false,
@@ -38,12 +39,22 @@ var ant3d = {
   mylastevent: '',
   ant3dMouse: new THREE.Vector2(),
   bBack: false,
-  NewTex: '',
+  NewTex1: '',
   NewTex2: '',
   NewTex3: '',
   NewTex4: '',
   NewTex5: '',
   NewTex6: '',
+  NewTex7: '',
+  NewTex8: '',
+  NewTex9: '',
+  NewTex10: '',
+  NewTex11: '',
+  NewTex12: '',
+  NewTex13: '',
+  NewTex14: '',
+  NewTex15: '',
+  NewTex16: '',
   bProcessingGifs: false,
   colMovs: [],
   colHeadings: [],
@@ -94,7 +105,7 @@ var ant3d = {
     let request = gapi.client.youtube.search.list({
       q: q,
       part: 'snippet',
-      maxResults: 3
+      maxResults: 4
     });
     request.execute(function (response) {
       ant3d.colYTVidIds.length = 0;
@@ -131,7 +142,7 @@ var ant3d = {
     let offset = Math.floor(Math.random() * 125);
     ant3d.colMovs.length = 0;
     $.ajax({
-      url: "https://api.giphy.com/v1/gifs/search?rating=pg-13&api_key=" + gkey + "&q='" + inSrch + "'&offset=" + offset + "&limit=3",
+      url: "https://api.giphy.com/v1/gifs/search?rating=pg-13&api_key=" + gkey + "&q='" + inSrch + "'&offset=" + offset + "&limit=5",
       method: "GET"
     }).then(function (response) {
       ant3d.colGiffys.length = 0;
@@ -151,12 +162,20 @@ var ant3d = {
     let video = document.getElementById('myvideo');
     let video2 = document.getElementById('myvideo2');
     let video3 = document.getElementById('myvideo3');
+    let video4 = document.getElementById('myvideo4');
+    let video5 = document.getElementById('myvideo5');
+
     video.loop = true;
     video.play();
     video2.loop = true;
     video2.play();
     video3.loop = true;
     video3.play();
+    video4.loop = true;
+    video4.play();
+    video5.loop = true;
+    video5.play();
+
   },
   Resize: function () {
     ant3d.myheight = window.innerHeight * ant3d.Hcoef;;
@@ -183,12 +202,23 @@ var ant3d = {
     ant3d.colArticles.length = 0;
     ant3d.colLinks.length = 0;
     inJQueryDomElement.empty();
-    ant3d.NewTex = '';
+    ant3d.NewTex1 = '';
     ant3d.NewTex2 = '';
     ant3d.NewTex3 = '';
     ant3d.NewTex4 = '';
     ant3d.NewTex5 = '';
     ant3d.NewTex6 = '';
+    ant3d.NewTex7 = '';
+    ant3d.NewTex8 = '';
+    ant3d.NewTex9 = '';
+    ant3d.NewTex10 = '';
+    ant3d.NewTex11 = '';
+    ant3d.NewTex12 = '';
+    ant3d.NewTex13 = '';
+    ant3d.NewTex14 = '';
+    ant3d.NewTex15 = '';
+    ant3d.NewTex16 = '';
+
     ant3d.camera.position.z = 0;
     inJQueryDomElement.append(ant3d.renderer.domElement);
     if (ant3d.bFirstTime) {
@@ -258,6 +288,9 @@ var ant3d = {
   },
   GetTextArray: function (inMyText, inMyLineLen) {
     //This function wraps text el-manuel aan.
+    if(!inMyText){
+      inMyText = "Not Found";
+    }
     let col = [];
     let wrkwords = inMyText.split(' ');
     let wrkline = '';
@@ -307,19 +340,20 @@ var ant3d = {
       });
     //add map here
     let xm = '';
-    let myrnd = Math.random();
+    let myrnd = Math.floor((Math.random()*22));
     let cubetype = 'unknown';
     let cubetypeid = -1;
+    
     switch (true) {
-      case myrnd < .08333:
+      case myrnd < 1:
         cubetype = 'html5Vid';
         cubetypeid = 1;
         xm = new THREE.MeshBasicMaterial({
-          map: ant3d.NewTex
+          map: ant3d.NewTex1
         });
         xm.map.needsUpdate = true;
         break;
-      case myrnd < .08333 * 2:
+      case myrnd < 2:
         cubetype = 'html5Vid';
         cubetypeid = 2;
         xm = new THREE.MeshBasicMaterial({
@@ -327,7 +361,7 @@ var ant3d = {
         });
         xm.map.needsUpdate = true;
         break;
-      case myrnd < .08333 * 3:
+      case myrnd < 3:
         cubetype = 'html5Vid';
         cubetypeid = 3;
         xm = new THREE.MeshBasicMaterial({
@@ -335,7 +369,7 @@ var ant3d = {
         });
         xm.map.needsUpdate = true;
         break;
-      case myrnd < .08333 * 4:
+      case myrnd < 4:
         cubetype = 'YouTube';
         cubetypeid = 1;
         xm = new THREE.MeshBasicMaterial({
@@ -343,7 +377,7 @@ var ant3d = {
         });
         xm.map.needsUpdate = true;
         break;
-      case myrnd < .08333 * 5:
+      case myrnd < 5:
         cubetype = 'YouTube';
         cubetypeid = 2;
         xm = new THREE.MeshBasicMaterial({
@@ -351,14 +385,95 @@ var ant3d = {
         });
         xm.map.needsUpdate = true;
         break;
-      case myrnd < .08333 * 6:
+      case myrnd < 6:
         cubetype = 'YouTube';
         cubetypeid = 3;
         xm = new THREE.MeshBasicMaterial({
           map: ant3d.NewTex6
         });
+        
         xm.map.needsUpdate = true;
         break;
+      case myrnd < 7:
+        cubetype = 'YouTube';
+        cubetypeid = 4;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex7
+        });        
+        xm.map.needsUpdate = true;
+        break;
+      case myrnd < 8:
+        cubetype = 'html5Vid';
+        cubetypeid = 4;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex8
+        });
+        xm.map.needsUpdate = true;
+        break;
+      case myrnd < 9:
+        cubetype = 'html5Vid';
+        cubetypeid = 5;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex9
+        });
+        xm.map.needsUpdate = true;
+        break;  
+      case myrnd < 10:
+        cubetype = 'html5Vid';
+        cubetypeid = 6;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex10
+        });
+        xm.map.needsUpdate = true;
+        break;
+      case myrnd < 11:
+        cubetype = 'html5Vid';
+        cubetypeid = 7;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex11
+        });
+        xm.map.needsUpdate = true;
+        break;        
+      case myrnd < 12:
+        cubetype = 'html5Vid';
+        cubetypeid = 8;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex12
+        });
+        xm.map.needsUpdate = true;
+        break;        
+      case myrnd < 13:
+        cubetype = 'html5Vid';
+        cubetypeid = 9;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex13
+        });
+        xm.map.needsUpdate = true;
+        break;                
+      case myrnd < 14:
+        cubetype = 'html5Vid';
+        cubetypeid = 10;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex14
+        });
+        xm.map.needsUpdate = true;
+        break;               
+      case myrnd < 15:
+        cubetype = 'html5Vid';
+        cubetypeid = 11;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex15
+        });
+        xm.map.needsUpdate = true;
+        break;               
+      case myrnd <= 16:
+        cubetype = 'html5Vid';
+        cubetypeid = 12;
+        xm = new THREE.MeshBasicMaterial({
+          map: ant3d.NewTex16
+        });
+        xm.map.needsUpdate = true;
+        break;                       
       default:
         cubetype = 'Wiki';
         cubetypeid = 0;
@@ -421,6 +536,45 @@ var ant3d = {
           case 3:
             cube.MyGiffyLink = ant3d.colGiffys[2];
             break;
+          case 4:
+            cube.MyGiffyLink = ant3d.colGiffys[3];
+            break;
+          case 5:
+            cube.MyGiffyLink = ant3d.colGiffys[4];
+            break;          
+          case 6:
+            cube.MyGiffyLink = ant3d.colGiffys[0];
+            break;
+          case 7:
+            cube.MyGiffyLink = ant3d.colGiffys[1];
+            break;
+          case 8:
+            cube.MyGiffyLink = ant3d.colGiffys[2];
+            break;
+          case 9:
+            cube.MyGiffyLink = ant3d.colGiffys[3];
+            break;
+          case 10:
+            cube.MyGiffyLink = ant3d.colGiffys[4];
+            break;
+          case 11:
+            cube.MyGiffyLink = ant3d.colGiffys[0];
+            break;
+          case 12:
+            cube.MyGiffyLink = ant3d.colGiffys[1];
+            break;
+          case 13:
+            cube.MyGiffyLink = ant3d.colGiffys[2];
+            break;
+          case 14:
+            cube.MyGiffyLink = ant3d.colGiffys[3];
+            break;
+          case 15:
+            cube.MyGiffyLink = ant3d.colGiffys[4];
+            break;
+          case 16:
+            cube.MyGiffyLink = ant3d.colGiffys[0];
+            break;
         };
         break;
       case 'YouTube':
@@ -433,6 +587,9 @@ var ant3d = {
             break;
           case 3:
             cube.YouTubeId = ant3d.colYTVidIds[2];
+            break;
+          case 4:
+            cube.YouTubeId = ant3d.colYTVidIds[3];
             break;
         };
         break;
@@ -458,21 +615,36 @@ var ant3d = {
     video2.setAttribute('crossorigin', 'anonymous');
     let video3 = document.getElementById('myvideo3');
     video3.setAttribute('crossorigin', 'anonymous');
+    let video4 = document.getElementById('myvideo4');
+    video4.setAttribute('crossorigin', 'anonymous');
+    let video5 = document.getElementById('myvideo5');
+    video5.setAttribute('crossorigin', 'anonymous');
     video.src = ant3d.colGiffys[0];
     video2.src = ant3d.colGiffys[1];
     video3.src = ant3d.colGiffys[2];
+    video4.src = ant3d.colGiffys[3];
+    video5.src = ant3d.colGiffys[4];
     video.load();
     //video.addEventListener('loadeddata', function () {
     video2.load();
     //  video2.addEventListener('loadeddata', function () {
     video3.load();
     //    video3.addEventListener('loadeddata', function () {
+    //ant 2018.04.04 expand giffy by 2 * etc..
+    video4.load();
+    video5.load();
     video.loop = true;
     video.play();
     video2.loop = true;
     video2.play();
     video3.loop = true;
     video3.play();
+    video4.loop = true;
+    video4.play();
+    video5.loop = true;
+    video5.play();
+    //
+
     let texture1 = new THREE.VideoTexture(video);
     texture1.minFilter = THREE.LinearFilter;
     texture1.magFilter = THREE.LinearFilter;
@@ -488,15 +660,44 @@ var ant3d = {
     texture3.magFilter = THREE.LinearFilter;
     texture3.format = THREE.RGBFormat;
     texture3.needsUpdate = true;
+//--carefull here... ant. 04/04/2018
+    
+
+    let texture8 = new THREE.VideoTexture(video4);
+    texture8.minFilter = THREE.LinearFilter;
+    texture8.magFilter = THREE.LinearFilter;
+    texture8.format = THREE.RGBFormat;
+    texture8.needsUpdate = true;
+
+    let texture9 = new THREE.VideoTexture(video5);
+    texture9.minFilter = THREE.LinearFilter;
+    texture9.magFilter = THREE.LinearFilter;
+    texture9.format = THREE.RGBFormat;
+    texture9.needsUpdate = true;
+
+//--carefull here... ant. 04/04/2018
     let texture4 = THREE.ImageUtils.loadTexture(ant3d.colYTVidImgs[0]);
     let texture5 = THREE.ImageUtils.loadTexture(ant3d.colYTVidImgs[1]);
     let texture6 = THREE.ImageUtils.loadTexture(ant3d.colYTVidImgs[2]);
-    ant3d.NewTex = texture1
+    let texture7 = THREE.ImageUtils.loadTexture(ant3d.colYTVidImgs[3]);
+   
+    ant3d.NewTex1 = texture1
     ant3d.NewTex2 = texture2
     ant3d.NewTex3 = texture3
     ant3d.NewTex4 = texture4
     ant3d.NewTex5 = texture5
     ant3d.NewTex6 = texture6
+    ant3d.NewTex7 = texture7
+    ant3d.NewTex8 = texture8
+    ant3d.NewTex9 = texture9
+    ant3d.NewTex10 = texture1
+    ant3d.NewTex11 = texture2
+    ant3d.NewTex12 = texture3
+    ant3d.NewTex13 = texture8
+    ant3d.NewTex14 = texture9
+    ant3d.NewTex15 = texture1
+    ant3d.NewTex16 = texture2
+    
     let artid = 0;
     for (let i = 0; i < 10; i++) {
       // Video is loaded and can be played
